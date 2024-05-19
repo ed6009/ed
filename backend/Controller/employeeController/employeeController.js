@@ -6,13 +6,13 @@ const getEmp = (req, res) => {
     if (err) {
       res.send(err);
     } else {
-      res.send(result);
+      res.send(result.rows);
     }
   });
 };
 
 const postEmp = (req, res) => {
-  let { emp_id, emp_name, password } = data;
+  let { emp_id, emp_name, password } = req.body;
   let query =
     "INSERT INTO employee(emp_id, emp_name, password) VALUES($1, $2, $3)";
   connection.query(query, [emp_id, emp_name, password], (err, result) => {

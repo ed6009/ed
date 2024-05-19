@@ -10,7 +10,9 @@ const {
 const validateSchema = require("../../Controller/employeeController/employeeValidation");
 
 employeeRouter.get("/getemp", getEmp);
-employeeRouter.post("/postemp", postEmp, validateSchema);
-employeeRouter.delete("/deleteemp", deleteEmp);
-employeeRouter.patch("/patchemppass", patchEmpPassword);
-employeeRouter.patch("/patchempname", patchEmpName);
+employeeRouter.post("/postemp", validateSchema, postEmp);
+employeeRouter.delete("/deleteemp/:emp_id", deleteEmp);
+employeeRouter.patch("/patchemppass/:emp_id", patchEmpPassword);
+employeeRouter.patch("/patchempname/:emp_id", patchEmpName);
+
+module.exports = employeeRouter;
