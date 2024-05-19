@@ -49,4 +49,17 @@ const patchEmpPassword = (req, res) => {
   });
 };
 
-module.exports = { getEmp, postEmp, deleteEmp, patchEmpPassword };
+const patchEmpName = (req, res) => {
+  let emp_id = req.params.emp_id;
+  let { emp_name } = req.body;
+  let query = "UPDATE employee SET emp_name=$1 WHERE emp_id=$2";
+  connection.query(query, [emp_name, emp_id], (err, result) => {
+    if (err) {
+      console.log(err.sqlMessage);
+    } else {
+      res.send(result);
+    }
+  });
+};
+
+module.exports = { getEmp, postEmp, deleteEmp, patchEmpPassword, patchEmpName };
