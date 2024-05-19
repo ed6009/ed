@@ -1,0 +1,52 @@
+const connection = require("../../Model/dbconfig");
+
+const getEmp = (req, res) => {
+  let query = "SELECT emp_id, emp_name FROM employee";
+  connection.query(query, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+};
+
+const postEmp = (req, res) => {
+  let { emp_id, emp_name, password } = data;
+  let query =
+    "INSERT INTO employee(emp_id, emp_name, password) VALUES($1, $2, $3)";
+  connection.query(query, [emp_id, emp_name, password], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+};
+
+const deleteEmp = (req, res) => {
+  let emp_id = req.params.emp_id;
+  let query = "DELETE FROM employee WHERE emp_id = $1";
+  connection.query(query, [emp_id], (err, result) => {
+    if (err) {
+      console.log(err.sqlMessage);
+    } else {
+      res.send(result);
+    }
+  });
+};
+
+const patchEmpPassword = (req, res) => {
+  let emp_id = req.params.emp_id;
+  let { password } = req.body;
+  let query = "UPDATE employee SET password=$1 WHERE emp_id=$2";
+  connection.query(query, [password, emp_id], (err, result) => {
+    if (err) {
+      console.log(err.sqlMessage);
+    } else {
+      res.send(result);
+    }
+  });
+};
+
+module.exports = { getEmp, postEmp, deleteEmp, patchEmpPassword };
