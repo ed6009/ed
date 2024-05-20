@@ -12,10 +12,10 @@ const getEmp = (req, res) => {
 };
 
 const postEmp = (req, res) => {
-  let { emp_id, emp_name, password } = req.body;
+  let { emp_id, emp_name} = req.body;
   let query =
-    "INSERT INTO employee(emp_id, emp_name, password) VALUES($1, $2, $3)";
-  connection.query(query, [emp_id, emp_name, password], (err, result) => {
+    "INSERT INTO employee(emp_id, emp_name) VALUES($1, $2)";
+  connection.query(query, [emp_id, emp_name], (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -28,19 +28,6 @@ const deleteEmp = (req, res) => {
   let emp_id = req.params.emp_id;
   let query = "DELETE FROM employee WHERE emp_id = $1";
   connection.query(query, [emp_id], (err, result) => {
-    if (err) {
-      console.log(err.sqlMessage);
-    } else {
-      res.send(result);
-    }
-  });
-};
-
-const patchEmpPassword = (req, res) => {
-  let emp_id = req.params.emp_id;
-  let { password } = req.body;
-  let query = "UPDATE employee SET password=$1 WHERE emp_id=$2";
-  connection.query(query, [password, emp_id], (err, result) => {
     if (err) {
       console.log(err.sqlMessage);
     } else {
@@ -62,4 +49,4 @@ const patchEmpName = (req, res) => {
   });
 };
 
-module.exports = { getEmp, postEmp, deleteEmp, patchEmpPassword, patchEmpName };
+module.exports = { getEmp, postEmp, deleteEmp, patchEmpName };
