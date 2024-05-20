@@ -9,7 +9,8 @@ const {
   patchRoleName,
 } = require("../../Controller/roleController/roleController");
 
-const validateSchema = require("../../Controller/roleController/roleValidation");
+const validateSchema =
+  require("../../Controller/roleController/roleValidation");
 
 roleRouter.get("/getrole", getRole);
 roleRouter.post("/postrole", validateSchema, postRole);
