@@ -3,7 +3,7 @@ const employeeRouter = require("./Routes/employeeRoutes/employeeRoutes");
 const roleRouter = require("./Routes/roleRoutes/roleRoutes");
 
 const app = express();
-app.use(express.json());
+app.use(express.json())
 
 const port = 8080;
 
