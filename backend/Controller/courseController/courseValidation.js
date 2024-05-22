@@ -1,11 +1,11 @@
 const Joi = require("joi");
 
 const schema = Joi.object({
-  course_id: Joi.number().min(1).max(5).required(),
+  course_id: Joi.string().min(2).max(5).required(),
   course_name: Joi.string().min(3).max(20).required(),
   course_description: Joi.string().min(20).max(50).required(),
   course_duration: Joi.string().min(4).max(6).required(),
-  teacher_id: Joi.number().min(1).max(5).required(),
+  teacher_id: Joi.string().min(2).max(5).required(),
 });
 
 const validateSchema = (req, res, next) => {

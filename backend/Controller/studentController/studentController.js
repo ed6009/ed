@@ -14,17 +14,22 @@ const getStd = (req, res) => {
 };
 
 const postStd = (req, res) => {
-  let { student_id, student_name } = req.body;
-  let query = "INSERT INTO student(student_id, student_name) VALUES($1, $2)";
-  connection.query(query, [student_id, student_name], (err, result) => {
-    if (err) {
-      res.send(err);
-      console.log(err);
-    } else {
-      res.send(result);
-      console.log(result);
+  let { student_id, student_name, password } = req.body;
+  let query =
+    "INSERT INTO student(student_id, student_name, password) VALUES($1, $2, $3)";
+  connection.query(
+    query,
+    [student_id, student_name, password],
+    (err, result) => {
+      if (err) {
+        res.send(err);
+        console.log(err);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
     }
-  });
+  );
 };
 
 const deleteStd = (req, res) => {
@@ -56,4 +61,19 @@ const patchStdName = (req, res) => {
   });
 };
 
-module.exports = { getStd, postStd, deleteStd, patchStdName };
+const patchStdPassword = (req, res) => {
+  let student_id = req.params.student_id;
+  let { password } = req.body;
+  let query = "UPDATE student SET password=$1 WHERE student_id=$2";
+  connection.query(query, [password, student_id], (err, result) => {
+    if (err) {
+      res.send(err);
+      console.log(err.sqlMessage);
+    } else {
+      res.send(result);
+      console.log(result);
+    }
+  });
+};
+
+module.exports = { getStd, postStd, deleteStd, patchStdName, patchStdPassword };

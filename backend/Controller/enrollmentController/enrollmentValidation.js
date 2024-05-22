@@ -1,9 +1,9 @@
 const Joi = require("joi");
 
 const schema = Joi.object({
-  enrollment_id: Joi.number().min(1).max(5).required(),
-  student_id: Joi.number().min(1).max(5).required(),
-  course_id: Joi.number().min(1).max(5).required(),
+  enrollment_id: Joi.string().min(2).max(5).required(),
+  student_id: Joi.string().min(2).max(5).required(),
+  course_id: Joi.string().min(2).max(5).required(),
   enrollment_date: Joi.date().required(),
 });
 

@@ -1,8 +1,9 @@
 const Joi = require("joi");
 
 const schema = Joi.object({
-  emp_id: Joi.number().min(1).max(5).required(),
+  emp_id: Joi.string().min(2).max(5).required(),
   emp_name: Joi.string().min(2).max(30).required(),
+  password: Joi.string().min(8).max(20).required(),
 });
 
 const validateSchema = (req, res, next) => {
