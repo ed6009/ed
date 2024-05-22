@@ -4,7 +4,7 @@ let connection = new pg.Client({
   host: "localhost",
   user: "postgres",
   password: "1121",
-  database: "edtemp",
+  database: "edtech",
   port: 5432,
 });
 
