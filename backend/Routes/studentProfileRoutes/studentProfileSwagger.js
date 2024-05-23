@@ -11,9 +11,6 @@
  *                  student_id:
  *                      type: string
  *                      description: The unique identifier for a student
- *                  age:
- *                      type: integer
- *                      description: The age of the student
  *                  gender:
  *                      type: string
  *                      description: The gender of the student
@@ -23,6 +20,33 @@
  *                  student_documentation:
  *                      type: string
  *                      description: The documentation of the student
+ *                  address:
+ *                      type: string
+ *                      description: The address of the student
+ *                  city:
+ *                      type: string
+ *                      description: The city of the student
+ *                  state:
+ *                      type: string
+ *                      description: The state of the student
+ *                  nationality:
+ *                      type: string
+ *                      description: The nationality of the student
+ *                  salary:
+ *                      type: number
+ *                      description: The salary of the student
+ *                  profile_photo:
+ *                      type: string
+ *                      description: The profile photo of the student
+ *                  doj:
+ *                      type: string
+ *                      description: The date of joining of the student
+ *                  dob:
+ *                      type: string
+ *                      description: The date of birth of the student
+ *                  phone_number:
+ *                      type: string
+ *                      description: The phone number of the student
  */
 
 /**

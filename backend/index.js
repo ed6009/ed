@@ -11,6 +11,7 @@ const studentProfileRouter = require("./Routes/studentProfileRoutes/studentProfi
 const teacherProfileRouter = require("./Routes/teacherProfileRoutes/teacherProfileRoutes");
 const courseRouter = require("./Routes/courseRoutes/courseRoutes");
 const enrollmentRouter = require("./Routes/enrollmentRoutes/enrollmentRoutes");
+const employeeProfileRouter = require("./Routes/employeeProfileRoutes/employeeProfileRoutes");
 
 const app = express();
 app.use(express.json());
@@ -24,6 +25,7 @@ app.use("/", studentProfileRouter);
 app.use("/", teacherProfileRouter);
 app.use("/", courseRouter);
 app.use("/", enrollmentRouter);
+app.use("/", employeeProfileRouter);
 
 const option = {
   definition: {
@@ -48,6 +50,7 @@ const option = {
     "./Routes/courseRoutes/courseSwagger.js",
     "./Routes/enrollmentRoutes/enrollmentSwagger.js",
     "./Routes/teacherRoutes/teacherSwagger.js",
+    "./Routes/employeeProfileRoutes/employeeProfileSwagger.js",
   ],
 };
 

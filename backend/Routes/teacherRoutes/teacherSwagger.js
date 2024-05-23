@@ -11,6 +11,18 @@
  *                  teacher_name:
  *                      type: string
  *                      description: The name of the teacher
+ *                  password:
+ *                      type: string
+ *                      description: The password of the teacher
+ *                  qualification:
+ *                      type: string
+ *                      description: The qualification of the teacher
+ *                  status:
+ *                      type: string
+ *                      description: The status of the teacher
+ *                  specialization:
+ *                      type: string
+ *                      description: The specialization of the teacher
  */
 
 /**
@@ -70,7 +82,7 @@
 
 /**
  * @swagger
- * /patchtchrname/{teacher_id}:
+ * /patchtchr/{teacher_id}:
  *          patch:
  *              summary: Update a teacher record
  *              description: Update a teacher record in the database using the teacher ID.

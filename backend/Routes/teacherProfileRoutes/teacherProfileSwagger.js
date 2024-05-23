@@ -6,14 +6,11 @@
  *              type: object
  *              properties:
  *                  profile_id:
- *                      type: integer
+ *                      type: string
  *                      description: The unique identifier for a profile
  *                  teacher_id:
- *                      type: integer
+ *                      type: string
  *                      description: The unique identifier for a teacher
- *                  age:
- *                      type: integer
- *                      description: The age of the teacher
  *                  gender:
  *                      type: string
  *                      description: The gender of the teacher
@@ -23,6 +20,33 @@
  *                  teacher_documentation:
  *                      type: string
  *                      description: The documentation of the teacher
+ *                  address:
+ *                      type: string
+ *                      description: The address of the teacher
+ *                  city:
+ *                      type: string
+ *                      description: The city of the teacher
+ *                  state:
+ *                      type: string
+ *                      description: The state of the teacher
+ *                  marital_status:
+ *                      type: string
+ *                      description: The marital status of the teacher
+ *                  nationality:
+ *                      type: string
+ *                      description: The nationality of the teacher
+ *                  salary:
+ *                      type: number
+ *                      description: The salary of the teacher
+ *                  profile_photo:
+ *                      type: string
+ *                      description: The profile photo of the teacher
+ *                  doj:
+ *                      type: string
+ *                      description: The date of joining of the teacher
+ *                  dob:
+ *                      type: string
+ *                      description: The date of birth of the teacher
  */
 
 /**

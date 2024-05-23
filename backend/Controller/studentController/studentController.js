@@ -1,7 +1,7 @@
 const connection = require("../../Model/dbconfig");
 
 const getStd = (req, res) => {
-  let query = "SELECT student_id, student_name FROM student";
+  let query = "SELECT student_id, student_name, status, education FROM student";
   connection.query(query, (err, result) => {
     if (err) {
       res.send(err);
@@ -14,12 +14,12 @@ const getStd = (req, res) => {
 };
 
 const postStd = (req, res) => {
-  let { student_id, student_name, password } = req.body;
+  let { student_id, student_name, password, status, education } = req.body;
   let query =
-    "INSERT INTO student(student_id, student_name, password) VALUES($1, $2, $3)";
+    "INSERT INTO student(student_id, student_name, password, status, education) VALUES($1, $2, $3, $4, $5)";
   connection.query(
     query,
-    [student_id, student_name, password],
+    [student_id, student_name, password, status, education],
     (err, result) => {
       if (err) {
         res.send(err);
@@ -46,19 +46,24 @@ const deleteStd = (req, res) => {
   });
 };
 
-const patchStdName = (req, res) => {
+const patchStd = (req, res) => {
   let student_id = req.params.student_id;
-  let { student_name } = req.body;
-  let query = "UPDATE student SET student_name=$1 WHERE student_id=$2";
-  connection.query(query, [student_name, student_id], (err, result) => {
-    if (err) {
-      res.send(err);
-      console.log(err.sqlMessage);
-    } else {
-      res.send(result);
-      console.log(result);
+  let { student_name, status, education } = req.body;
+  let query =
+    "UPDATE student SET student_name=$1, status=$2, education=$3 WHERE student_id=$4";
+  connection.query(
+    query,
+    [student_name, status, education, student_id],
+    (err, result) => {
+      if (err) {
+        res.send(err);
+        console.log(err.sqlMessage);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
     }
-  });
+  );
 };
 
 const patchStdPassword = (req, res) => {
@@ -76,4 +81,4 @@ const patchStdPassword = (req, res) => {
   });
 };
 
-module.exports = { getStd, postStd, deleteStd, patchStdName, patchStdPassword };
+module.exports = { getStd, postStd, deleteStd, patchStd, patchStdPassword };

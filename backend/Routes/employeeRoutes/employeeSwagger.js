@@ -14,6 +14,15 @@
  *                  password:
  *                      type: string
  *                      description: The password of the employee
+ *                  qualification:
+ *                      type: string
+ *                      description: The qualification of the employee
+ *                  status:
+ *                      type: string
+ *                      description: The status of the employee
+ *                  doj:
+ *                      type: date
+ *                      description: The joining date of the employee
  */
 
 /**
@@ -73,7 +82,7 @@
 
 /**
  * @swagger
- * /patchempname/{emp_id}:
+ * /patchemp/{emp_id}:
  *          patch:
  *              summary: Update a employee name
  *              description: Update a employee record in the database using the employee ID.

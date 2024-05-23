@@ -14,12 +14,12 @@
  *                  course_description:
  *                      type: string
  *                      description: The description of the course
- *                  course_duration:
- *                      type: string
- *                      description: The duration of the course
  *                  teacher_id:
  *                      type: string
  *                      description: The unique identifier for a teacher
+ *                  syllabus:
+ *                      type: string
+ *                      description: The syllabus for a teacher
  */
 
 /**

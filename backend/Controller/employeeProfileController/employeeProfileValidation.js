@@ -2,18 +2,19 @@ const Joi = require("joi");
 
 const schema = Joi.object({
   profile_id: Joi.string().min(2).max(5).required(),
-  student_id: Joi.string().min(2).max(5).required(),
-  gender: Joi.string().min(4).max(6).required(),
+  emp_id: Joi.string().min(2).max(5).required(),
   email: Joi.string().email().required(),
-  student_documentation: Joi.string().min(1).max(255),
+  phone_number: Joi.string().min(10).required(),
+  gender: Joi.string().required(),
+  profile_photo: Joi.string().min(1).max(255),
+  attach_document: Joi.string().min(1).max(255),
   address: Joi.string(),
   city: Joi.string(),
   state: Joi.string(),
+  salary: Joi.number(),
   nationality: Joi.string(),
-  profile_photo: Joi.string(),
-  doj: Joi.date(),
+  marital_status: Joi.string(),
   dob: Joi.date(),
-  phone_number: Joi.string(),
 });
 
 const validateSchema = (req, res, next) => {

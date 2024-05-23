@@ -14,6 +14,12 @@
  *                  password:
  *                      type: string
  *                      description: The password of the student
+ *                  status:
+ *                      type: string
+ *                      description: The status of the student
+ *                  education:
+ *                      type: string
+ *                      description: The education of the student
  */
 
 /**
@@ -73,7 +79,7 @@
 
 /**
  * @swagger
- * /patchstdname/{student_id}:
+ * /patchstd/{student_id}:
  *          patch:
  *              summary: Update a student name
  *              description: Update a student record in the database using the student ID.
