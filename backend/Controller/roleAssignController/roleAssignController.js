@@ -1,4 +1,4 @@
-const connection = require("../../Model/dbconfig");
+const connection = require("../../Model/Database/dbconfig");
 
 const getRoleAssign = (req, res) => {
   let query = "SELECT emp_id, role_id FROM roleassign";

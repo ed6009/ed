@@ -1,4 +1,4 @@
-const connection = require("../../Model/dbconfig");
+const connection = require("../../Model/Database/dbconfig");
 
 const getStd = (req, res) => {
   let query = "SELECT student_id, student_name, status, education FROM student";

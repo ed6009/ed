@@ -32,9 +32,6 @@
  *                  nationality:
  *                      type: string
  *                      description: The nationality of the student
- *                  salary:
- *                      type: number
- *                      description: The salary of the student
  *                  profile_photo:
  *                      type: string
  *                      description: The profile photo of the student

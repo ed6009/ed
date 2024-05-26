@@ -1,4 +1,4 @@
-const connection = require("../../Model/dbconfig");
+const connection = require("../../Model/Database/dbconfig");
 
 const getTchrPro = (req, res) => {
   let query =
@@ -15,52 +15,50 @@ const getTchrPro = (req, res) => {
 };
 
 const postTchrPro = (req, res) => {
-  let {
-    profile_id,
-    teacher_id,
-    gender,
-    email,
-    teacher_documentation,
-    address,
-    city,
-    state,
-    marital_status,
-    nationality,
-    salary,
-    profile_photo,
-    doj,
-    dob,
-  } = req.body;
+  var fullUrl = req.protocol + "://" + req.get("host") + "../../Assets/Images/";
+  let teacher_profile_data = {
+    profile_id: req.body.profile_id,
+    teacher_id: req.body.student_id,
+    gender: req.body.gender,
+    email: req.body.email,
+    teacher_documentation: req.body.teacher_documentation,
+    address: req.body.address,
+    city: req.body.city,
+    state: req.body.state,
+    marital_status: req.body.marital_status,
+    nationality: req.body.nationality,
+    salary: req.body.salary,
+    profile_photo: fullUrl + req.file.filename,
+    doj: req.body.doj,
+    dob: req.body.dob,
+  };
+  const data = [
+    teacher_profile_data.profile_id,
+    teacher_profile_data.teacher_id,
+    teacher_profile_data.gender,
+    teacher_profile_data.email,
+    teacher_profile_data.teacher_documentation,
+    teacher_profile_data.address,
+    teacher_profile_data.city,
+    teacher_profile_data.state,
+    teacher_profile_data.marital_status,
+    teacher_profile_data.nationality,
+    teacher_profile_data.salary,
+    teacher_profile_data.profile_photo,
+    teacher_profile_data.doj,
+    teacher_profile_data.dob,
+  ];
   let query =
     "INSERT INTO teacherprofile(profile_id, teacher_id, gender, email, teacher_documentation, address, city, state, marital_status, nationality, salary, profile_photo, doj, dob) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)";
-  connection.query(
-    query,
-    [
-      profile_id,
-      teacher_id,
-      gender,
-      email,
-      teacher_documentation,
-      address,
-      city,
-      state,
-      marital_status,
-      nationality,
-      salary,
-      profile_photo,
-      doj,
-      dob,
-    ],
-    (err, result) => {
-      if (err) {
-        res.send(err);
-        console.log(err);
-      } else {
-        res.send(result);
-        console.log(result);
-      }
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      res.send(err);
+      console.log(err);
+    } else {
+      res.send(result);
+      console.log(result);
     }
-  );
+  });
 };
 
 const deleteTchrPro = (req, res) => {

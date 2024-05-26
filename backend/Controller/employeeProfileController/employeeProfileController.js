@@ -1,4 +1,4 @@
-const connection = require("../../Model/dbconfig");
+const connection = require("../../Model/Database/dbconfig");
 
 const getEmpPro = (req, res) => {
   let query =

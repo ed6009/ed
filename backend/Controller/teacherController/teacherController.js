@@ -1,7 +1,8 @@
-const connection = require("../../Model/dbconfig");
+const connection = require("../../Model/Database/dbconfig");
 
 const getTchr = (req, res) => {
-  let query = "SELECT teacher_id, teacher_name, qualification, status, specialization FROM teacher";
+  let query =
+    "SELECT teacher_id, teacher_name, qualification, status, specialization FROM teacher";
   connection.query(query, (err, result) => {
     if (err) {
       res.send(err);
@@ -58,15 +59,19 @@ const patchTchr = (req, res) => {
   let { teacher_name, qualification, status, specialization } = req.body;
   let query =
     "UPDATE teacher SET teacher_name=$1, qualification=$2, status=$3, specialization=$4 WHERE teacher_id=$5";
-  connection.query(query, [teacher_name,qualification, status, specialization, teacher_id], (err, result) => {
-    if (err) {
-      res.send(err);
-      console.log(err.sqlMessage);
-    } else {
-      res.send(result);
-      console.log(result);
+  connection.query(
+    query,
+    [teacher_name, qualification, status, specialization, teacher_id],
+    (err, result) => {
+      if (err) {
+        res.send(err);
+        console.log(err.sqlMessage);
+      } else {
+        res.send(result);
+        console.log(result);
+      }
     }
-  });
+  );
 };
 
 const patchTchrPassword = (req, res) => {

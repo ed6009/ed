@@ -7,9 +7,15 @@ const {
   patchStdPro,
 } = require("../../Controller/studentProfileController/studentProfileController");
 const validateSchema = require("../../Controller/studentProfileController/studentProfileValidation");
+const upload = require("../../Model/Multer/multerconfig");
 
 studentProfileRouter.get("/getstdpro", getStdPro);
-studentProfileRouter.post("/poststdpro", validateSchema, postStdPro);
+studentProfileRouter.post(
+  "/poststdpro",
+  upload.single("image"),
+  validateSchema,
+  postStdPro
+);
 studentProfileRouter.delete(
   "/deletestdpro/:profile_id/:student_id",
   deleteStdPro

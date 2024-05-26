@@ -1,5 +1,4 @@
-const connection = require("../../Model/dbconfig");
-const upload = require("../../Model/multerconfig");
+const connection = require("../../Model/Database/dbconfig");
 
 const getStdPro = (req, res) => {
   let query =
@@ -16,50 +15,48 @@ const getStdPro = (req, res) => {
 };
 
 const postStdPro = (req, res) => {
-  let {
-    profile_id,
-    student_id,
-    gender,
-    email,
-    student_documentation,
-    address,
-    city,
-    state,
-    nationality,
-    profile_photo,
-    doj,
-    dob,
-    phone_number,
-  } = req.body;
+  var fullUrl = req.protocol + "://" + req.get("host") + "../../Assets/Images/";
+  let student_profile_data = {
+    profile_id: req.body.profile_id,
+    student_id: req.body.student_id,
+    gender: req.body.gender,
+    email: req.body.email,
+    student_documentation: req.body.student_documentation,
+    address: req.body.address,
+    city: req.body.city,
+    state: req.body.state,
+    nationality: req.body.nationality,
+    profile_photo: fullUrl + req.file.filename,
+    doj: req.body.doj,
+    dob: req.body.dob,
+    phone_number: req.body.phone_number,
+  };
+  const data = [
+    student_profile_data.profile_id,
+    student_profile_data.student_id,
+    student_profile_data.gender,
+    student_profile_data.email,
+    student_profile_data.student_documentation,
+    student_profile_data.address,
+    student_profile_data.city,
+    student_profile_data.state,
+    student_profile_data.nationality,
+    student_profile_data.profile_photo,
+    student_profile_data.doj,
+    student_profile_data.dob,
+    student_profile_data.phone_number,
+  ];
   let query =
     "INSERT INTO studentprofile(profile_id, student_id, gender, email, student_documentation, address, city, state, nationality, profile_photo, doj, dob, phone_number) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)";
-  connection.query(
-    query,
-    [
-      profile_id,
-      student_id,
-      gender,
-      email,
-      student_documentation,
-      address,
-      city,
-      state,
-      nationality,
-      profile_photo,
-      doj,
-      dob,
-      phone_number,
-    ],
-    (err, result) => {
-      if (err) {
-        res.send(err);
-        console.log(err);
-      } else {
-        res.send(result);
-        console.log(result);
-      }
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      res.send(err);
+      console.log(err);
+    } else {
+      res.send(result);
+      console.log(result);
     }
-  );
+  });
 };
 
 const deleteStdPro = (req, res) => {

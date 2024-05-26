@@ -1,4 +1,4 @@
-const connection = require("../../Model/dbconfig");
+const connection = require("../../Model/Database/dbconfig");
 
 const getCourse = (req, res) => {
   let query =
@@ -62,7 +62,14 @@ const patchCourse = (req, res) => {
     "UPDATE course SET course_name = $1, course_description = $2, teacher_id = $3, syllabus = $4 WHERE course_id = $5";
   connection.query(
     query,
-    [course_name, course_description, course_duration, teacher_id, syllabus, course_id],
+    [
+      course_name,
+      course_description,
+      course_duration,
+      teacher_id,
+      syllabus,
+      course_id,
+    ],
     (err, result) => {
       if (err) {
         res.send(err);
