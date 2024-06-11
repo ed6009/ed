@@ -15,7 +15,7 @@ const getTchrPro = (req, res) => {
 };
 
 const postTchrPro = (req, res) => {
-  var fullUrl = req.protocol + "://" + req.get("host") + "../../Assets/Images/";
+  var fullUrl = req.protocol + "://" + req.get("host") + "/images/";
   let teacher_profile_data = {
     profile_id: req.body.profile_id,
     teacher_id: req.body.student_id,

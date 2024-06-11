@@ -15,6 +15,6 @@ const validateSchema =
 roleRouter.get("/getrole", getRole);
 roleRouter.post("/postrole", validateSchema, postRole);
 roleRouter.delete("/deleterole/:role_id", deleteRole);
-roleRouter.patch("/patchrole/:role_id", patchRoleName);
+roleRouter.patch("/patchrolename/:role_id", patchRoleName);
 
 module.exports = roleRouter;

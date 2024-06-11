@@ -2,7 +2,7 @@ const connection = require("../../Model/Database/dbconfig");
 
 const getCourse = (req, res) => {
   let query =
-    "SELECT course_id, course_name, course_description, teacher_id, syllabus FROM course";
+    "SELECT course_id, course_name, course_description, teacher_id, syllabus FROM course ORDER BY course_id";
   connection.query(query, (err, result) => {
     if (err) {
       res.send(err);
@@ -25,7 +25,6 @@ const postCourse = (req, res) => {
       course_id,
       course_name,
       course_description,
-      course_duration,
       teacher_id,
       syllabus,
     ],
@@ -65,7 +64,6 @@ const patchCourse = (req, res) => {
     [
       course_name,
       course_description,
-      course_duration,
       teacher_id,
       syllabus,
       course_id,

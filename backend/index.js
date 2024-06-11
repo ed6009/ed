@@ -1,6 +1,7 @@
 const express = require("express");
 const swaggerui = require("swagger-ui-express");
 const swaggerjsdoc = require("swagger-jsdoc");
+const cors = require("cors");
 const port = 8080;
 const employeeRouter = require("./Routes/employeeRoutes/employeeRoutes");
 const roleRouter = require("./Routes/roleRoutes/roleRoutes");
@@ -14,6 +15,7 @@ const enrollmentRouter = require("./Routes/enrollmentRoutes/enrollmentRoutes");
 const employeeProfileRouter = require("./Routes/employeeProfileRoutes/employeeProfileRoutes");
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.use("/", employeeRouter);
@@ -55,6 +57,8 @@ const option = {
 };
 
 app.use("/testing", swaggerui.serve, swaggerui.setup(swaggerjsdoc(option)));
+
+app.use("/images", express.static("Images"));
 
 app.listen(port, () => {
   console.log("SERVER IS RUNNING");

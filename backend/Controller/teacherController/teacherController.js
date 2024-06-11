@@ -2,7 +2,7 @@ const connection = require("../../Model/Database/dbconfig");
 
 const getTchr = (req, res) => {
   let query =
-    "SELECT teacher_id, teacher_name, qualification, status, specialization FROM teacher";
+    "SELECT teacher_id, teacher_name, qualification, status, specialization FROM teacher ORDER BY teacher_id";
   connection.query(query, (err, result) => {
     if (err) {
       res.send(err);

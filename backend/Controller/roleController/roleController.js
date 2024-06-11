@@ -1,7 +1,7 @@
 const connection = require("../../Model/Database/dbconfig");
 
 const getRole = (req, res) => {
-  let query = "SELECT role_id, role_name FROM role";
+  let query = "SELECT role_id, role_name FROM role ORDER BY role_id";
   connection.query(query, (err, result) => {
     if (err) {
       res.send(err);

@@ -1,7 +1,7 @@
 const connection = require("../../Model/Database/dbconfig");
 
 const getStd = (req, res) => {
-  let query = "SELECT student_id, student_name, status, education FROM student";
+  let query = "SELECT student_id, student_name, status, education FROM student ORDER BY student_id";
   connection.query(query, (err, result) => {
     if (err) {
       res.send(err);
@@ -14,12 +14,12 @@ const getStd = (req, res) => {
 };
 
 const postStd = (req, res) => {
-  let { student_id, student_name, password, status, education } = req.body;
+  let { student_id, student_name, status, password, education } = req.body;
   let query =
-    "INSERT INTO student(student_id, student_name, password, status, education) VALUES($1, $2, $3, $4, $5)";
+    "INSERT INTO student(student_id, student_name, status, password, education) VALUES($1, $2, $3, $4, $5)";
   connection.query(
     query,
-    [student_id, student_name, password, status, education],
+    [student_id, student_name, status, password, education],
     (err, result) => {
       if (err) {
         res.send(err);

@@ -48,7 +48,7 @@ const postStdPro = (req, res) => {
   ];
   let query =
     "INSERT INTO studentprofile(profile_id, student_id, gender, email, student_documentation, address, city, state, nationality, profile_photo, doj, dob, phone_number) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)";
-  connection.query(query, data, (err, result) => {
+  connection.query(query, [student_profile_data], (err, result) => {
     if (err) {
       res.send(err);
       console.log(err);
