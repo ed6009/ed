@@ -5,6 +5,7 @@ const {
   postTchrPro,
   deleteTchrPro,
   patchTchrPro,
+  getSinglePro,
 } = require("../../Controller/teacherProfileController/teacherProfileController");
 const validateSchema = require("../../Controller/teacherProfileController/teacherProfileValidation");
 const upload = require("../../Model/Multer/multerconfig");
@@ -24,5 +25,7 @@ teacherProfileRouter.patch(
   "/patchtchrpro/:profile_id/:teacher_id",
   patchTchrPro
 );
+
+teacherProfileRouter.get("/getsingletchrpro/:teacher_id", getSinglePro);
 
 module.exports = teacherProfileRouter;

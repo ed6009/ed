@@ -14,6 +14,19 @@ const getEmp = (req, res) => {
   });
 };
 
+const countEmp = (req, res) => {
+  let query = "SELECT COUNT(emp_id) FROM employee"
+  connection.query(query, (err, result) => {
+    if (err) {
+      res.send(err);
+      console.log(err.sqlMessage);
+    } else {
+      res.send(result.rows);
+      console.log(result.rows);
+    }
+  });
+}
+
 const postEmp = (req, res) => {
   let { emp_id, emp_name, password, qualification, status, doj } = req.body;
   let query =
@@ -82,4 +95,4 @@ const patchEmpPassword = (req, res) => {
   });
 };
 
-module.exports = { getEmp, postEmp, deleteEmp, patchEmp, patchEmpPassword };
+module.exports = { getEmp, postEmp, deleteEmp, patchEmp, patchEmpPassword, countEmp };

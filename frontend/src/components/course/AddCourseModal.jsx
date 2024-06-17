@@ -4,7 +4,7 @@ const AddCourseModal = () => {
   const [course_id, setCourseId] = useState("");
   const [course_name, setCourseName] = useState("");
   const [course_description, setCourseDescription] = useState("");
-  const [teacher_id, setTeacherId] = useState("");
+  const [fees, setFees] = useState();
   const [syllabus, setSyllabus] = useState("");
 
   const postCourse = () => {
@@ -12,7 +12,7 @@ const AddCourseModal = () => {
       course_id,
       course_name,
       course_description,
-      teacher_id,
+      fees,
       syllabus,
     };
     fetch("http://localhost:8080/postcourse", {
@@ -88,13 +88,13 @@ const AddCourseModal = () => {
                 />
               </label>
               <label className="input input-bordered flex items-center gap-2 mb-2">
-                Teacher ID
+                Fees
                 <input
                   type="text"
                   className="grow"
-                  placeholder="Enter Teacher ID"
+                  placeholder="Enter Fee Amount"
                   onChange={(e) => {
-                    setTeacherId(e.target.value);
+                    setFees(e.target.value);
                   }}
                 />
               </label>

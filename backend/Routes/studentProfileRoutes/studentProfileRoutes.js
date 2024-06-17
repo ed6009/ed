@@ -5,11 +5,13 @@ const {
   postStdPro,
   deleteStdPro,
   patchStdPro,
+  getSinglePro,
 } = require("../../Controller/studentProfileController/studentProfileController");
 const validateSchema = require("../../Controller/studentProfileController/studentProfileValidation");
 const upload = require("../../Model/Multer/multerconfig");
 
 studentProfileRouter.get("/getstdpro", getStdPro);
+studentProfileRouter.get("/getsinglestdpro/:student_id", getSinglePro);
 studentProfileRouter.post(
   "/poststdpro",
   upload.single("image"),

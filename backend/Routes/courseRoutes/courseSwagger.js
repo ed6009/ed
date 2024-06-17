@@ -14,9 +14,9 @@
  *                  course_description:
  *                      type: string
  *                      description: The description of the course
- *                  teacher_id:
- *                      type: string
- *                      description: The unique identifier for a teacher
+ *                  fees:
+ *                      type: number
+ *                      description: Total fees for the course
  *                  syllabus:
  *                      type: string
  *                      description: The syllabus for a teacher

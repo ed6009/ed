@@ -14,11 +14,26 @@ const getTchrPro = (req, res) => {
   });
 };
 
+const getSinglePro = (req, res) => {
+  let teacher_id = req.params.teacher_id;
+  let query =
+    "SELECT profile_id, teacher_id, gender, email, teacher_documentation, address, city, state, marital_status, nationality, salary, profile_photo, doj, dob FROM teacherprofile WHERE teacher_id=$1";
+  connection.query(query, [teacher_id], (err, result) => {
+    if (err) {
+      res.send(err);
+      console.log(err);
+    } else {
+      res.send(result.rows);
+      console.log(result.rows);
+    }
+  });
+};
+
 const postTchrPro = (req, res) => {
   var fullUrl = req.protocol + "://" + req.get("host") + "/images/";
   let teacher_profile_data = {
     profile_id: req.body.profile_id,
-    teacher_id: req.body.student_id,
+    teacher_id: req.body.teacher_id,
     gender: req.body.gender,
     email: req.body.email,
     teacher_documentation: req.body.teacher_documentation,
@@ -124,4 +139,10 @@ const patchTchrPro = (req, res) => {
   );
 };
 
-module.exports = { getTchrPro, postTchrPro, deleteTchrPro, patchTchrPro };
+module.exports = {
+  getTchrPro,
+  postTchrPro,
+  deleteTchrPro,
+  patchTchrPro,
+  getSinglePro,
+};

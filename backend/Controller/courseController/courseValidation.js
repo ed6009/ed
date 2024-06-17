@@ -4,7 +4,7 @@ const schema = Joi.object({
   course_id: Joi.string().min(2).max(5).required(),
   course_name: Joi.string().min(3).max(20).required(),
   course_description: Joi.string().required(),
-  teacher_id: Joi.string().min(2).max(5).required(),
+  fees: Joi.number().min(20000).max(200000).required(),
   syllabus: Joi.string().required(),
 });
 

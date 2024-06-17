@@ -7,6 +7,7 @@ import RoleTable from "./components/role/RoleTable";
 import CourseTable from "./components/course/CourseTable";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Dashboard from "./components/dashboard/Dashboard";
+import Example from "./Example";
 
 function App() {
   const router = createBrowserRouter([
@@ -28,6 +29,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+      {/* <Example/> */}
     </>
   );
 }

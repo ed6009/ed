@@ -5,7 +5,7 @@ const CourseTable = () => {
   const [data, setData] = useState([]);
   const [course_name, setCourseName] = useState("");
   const [course_description, setCourseDescription] = useState("");
-  const [teacher_id, setTeacherId] = useState("");
+  const [fees, setFees] = useState();
   const [syllabus, setSyllabus] = useState("");
 
   function getCourseData() {
@@ -21,7 +21,7 @@ const CourseTable = () => {
   }, []);
 
   const patchCourse = (course_id) => {
-    const data = { course_name, course_description, teacher_id, syllabus };
+    const data = { course_name, course_description, fees, syllabus };
     fetch(`http://localhost:8080/patchcourse/${course_id}`, {
       method: "PATCH",
       headers: {
@@ -50,7 +50,7 @@ const CourseTable = () => {
               <th className="text-center text-base">Course Name</th>
               <th className="text-center text-base">Course Description</th>
               <th className="text-center text-base">Syllabus</th>
-              <th className="text-center text-base">Teacher ID</th>
+              <th className="text-center text-base">Fees</th>
               <th className="text-center text-base">Action</th>
             </tr>
           </thead>
@@ -63,11 +63,11 @@ const CourseTable = () => {
                   <td className="text-center">{currEle.course_name}</td>
                   <td className="text-center">{currEle.course_description}</td>
                   <td className="text-center">{currEle.syllabus}</td>
-                  <td className="text-center">{currEle.teacher_id}</td>
+                  <td className="text-center">{currEle.fees}</td>
                   <td className="text-center flex justify-center gap-2">
                     <div>
                       <button
-                        className="btn btn-sm"
+                        className="btn btn-sm btn-primary"
                         onClick={() =>
                           document
                             .getElementById(`my_modal_${currEle.course_id}`)
@@ -126,13 +126,13 @@ const CourseTable = () => {
                               />
                             </label>
                             <label className="input input-bordered flex items-center gap-2 mb-2">
-                              Teacher ID
+                              Fees
                               <input
                                 type="text"
                                 className="grow"
-                                placeholder="Enter Teacher ID"
+                                placeholder="Enter Fee Amount"
                                 onChange={(e) => {
-                                  setTeacherId(e.target.value);
+                                  setFees(e.target.value);
                                 }}
                               />
                             </label>

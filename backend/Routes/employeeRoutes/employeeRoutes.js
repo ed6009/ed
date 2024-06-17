@@ -5,7 +5,8 @@ const {
   postEmp,
   deleteEmp,
   patchEmp,
-  patchEmpPassword
+  patchEmpPassword,
+  countEmp
 } = require("../../Controller/employeeController/employeeController");
 const validateSchema = require("../../Controller/employeeController/employeeValidation");
 
@@ -14,5 +15,6 @@ employeeRouter.post("/postemp", validateSchema, postEmp);
 employeeRouter.delete("/deleteemp/:emp_id", deleteEmp);
 employeeRouter.patch("/patchemp/:emp_id", patchEmp);
 employeeRouter.patch("/patchemppassword/:emp_id", patchEmpPassword)
+employeeRouter.get("/countemp", countEmp)
 
 module.exports = employeeRouter;

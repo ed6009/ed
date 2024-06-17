@@ -5,17 +5,32 @@ const getStdPro = (req, res) => {
     "SELECT profile_id, student_id, gender, email, student_documentation, address, city, state, nationality, profile_photo, doj, dob, phone_number FROM studentprofile";
   connection.query(query, (err, result) => {
     if (err) {
-      res.send(err);
       console.log(err);
+      res.status(500).send(err);
     } else {
-      res.send(result.rows);
+      res.status(200).send(result.rows);
+      console.log(result.rows);
+    }
+  });
+};
+
+const getSinglePro = (req, res) => {
+  let student_id = req.params.student_id;
+  let query =
+    "SELECT profile_id, student_id, gender, email, student_documentation, address, city, state, nationality, profile_photo, doj, dob, phone_number FROM studentprofile WHERE student_id=$1";
+  connection.query(query, [student_id], (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(result.rows);
       console.log(result.rows);
     }
   });
 };
 
 const postStdPro = (req, res) => {
-  var fullUrl = req.protocol + "://" + req.get("host") + "../../Assets/Images/";
+  var fullUrl = req.protocol + "://" + req.get("host") + "/images/";
   let student_profile_data = {
     profile_id: req.body.profile_id,
     student_id: req.body.student_id,
@@ -31,6 +46,7 @@ const postStdPro = (req, res) => {
     dob: req.body.dob,
     phone_number: req.body.phone_number,
   };
+
   const data = [
     student_profile_data.profile_id,
     student_profile_data.student_id,
@@ -48,12 +64,12 @@ const postStdPro = (req, res) => {
   ];
   let query =
     "INSERT INTO studentprofile(profile_id, student_id, gender, email, student_documentation, address, city, state, nationality, profile_photo, doj, dob, phone_number) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)";
-  connection.query(query, [student_profile_data], (err, result) => {
+  connection.query(query, data, (err, result) => {
     if (err) {
-      res.send(err);
       console.log(err);
+      res.status(500).send(err);
     } else {
-      res.send(result);
+      res.status(201).send(result);
       console.log(result);
     }
   });
@@ -65,10 +81,10 @@ const deleteStdPro = (req, res) => {
     "DELETE FROM studentprofile WHERE profile_id = $1 AND student_id = $2";
   connection.query(query, [profile_id, student_id], (err, result) => {
     if (err) {
-      res.send(err);
       console.log(err);
+      res.status(500).send(err);
     } else {
-      res.send(result);
+      res.status(200).send(result);
       console.log(result);
     }
   });
@@ -110,14 +126,20 @@ const patchStdPro = (req, res) => {
     ],
     (err, result) => {
       if (err) {
-        res.send(err);
         console.log(err);
+        res.status(500).send(err);
       } else {
-        res.send(result);
+        res.status(200).send(result);
         console.log(result);
       }
     }
   );
 };
 
-module.exports = { getStdPro, postStdPro, deleteStdPro, patchStdPro };
+module.exports = {
+  getStdPro,
+  postStdPro,
+  deleteStdPro,
+  patchStdPro,
+  getSinglePro,
+};

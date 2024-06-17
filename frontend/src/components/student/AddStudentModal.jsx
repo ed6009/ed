@@ -30,12 +30,26 @@ const AddStudentModal = () => {
     <div>
       <div>
         <button
-          className="btn"
-          onClick={() => document.getElementById(`my_modal`).showModal()}
+          className="btn btn-neutral hover:scale-110 transition-transform duration-300"
+          onClick={() => document.getElementById(`my_modal_student`).showModal()}
         >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
           Add Student
         </button>
-        <dialog id={`my_modal`} className="modal">
+        <dialog id={`my_modal_student`} className="modal">
           <div className="modal-box">
             <h3 className="font-bold text-lg">Add Student</h3>
             <form onSubmit={() => postStd()}>
