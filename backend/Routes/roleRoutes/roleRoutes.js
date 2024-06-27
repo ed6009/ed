@@ -7,6 +7,7 @@ const {
   postRole,
   deleteRole,
   patchRoleName,
+  getRoleName
 } = require("../../Controller/roleController/roleController");
 
 const validateSchema =
@@ -16,5 +17,6 @@ roleRouter.get("/getrole", getRole);
 roleRouter.post("/postrole", validateSchema, postRole);
 roleRouter.delete("/deleterole/:role_id", deleteRole);
 roleRouter.patch("/patchrolename/:role_id", patchRoleName);
+roleRouter.get("/getrolename/:role_id", getRoleName);
 
 module.exports = roleRouter;

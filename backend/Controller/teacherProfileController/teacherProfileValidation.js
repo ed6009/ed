@@ -1,11 +1,9 @@
 const Joi = require("joi");
 
 const schema = Joi.object({
-  profile_id: Joi.string().min(2).max(5).required(),
-  teacher_id: Joi.string().min(2).max(5).required(),
+  teacher_id: Joi.string().min(2).max(5),
   gender: Joi.string().min(4).max(6).required(),
   email: Joi.string().email().required(),
-  teacher_documentation: Joi.string().min(1).max(255),
   address: Joi.string(),
   city: Joi.string(),
   state: Joi.string(),

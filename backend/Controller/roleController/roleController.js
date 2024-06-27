@@ -13,6 +13,20 @@ const getRole = (req, res) => {
   });
 };
 
+const getRoleName = (req, res) => {
+  let role_id = req.params.role_id;
+  let query = "SELECT role_name FROM role WHERE role_id=$1";
+  connection.query(query, [role_id], (err, result) => {
+    if (err) {
+      res.send(err);
+      console.log(err.sqlMessage);
+    } else {
+      res.send(result.rows[0].role_name);
+      console.log(result.rows[0].role_name);
+    }
+  });
+};
+
 const postRole = (req, res) => {
   let { role_id, role_name } = req.body;
   let query = "INSERT INTO role(role_id, role_name) VALUES($1, $2)";
@@ -56,4 +70,4 @@ const patchRoleName = (req, res) => {
   });
 };
 
-module.exports = { getRole, postRole, deleteRole, patchRoleName };
+module.exports = { getRole, postRole, deleteRole, patchRoleName, getRoleName };

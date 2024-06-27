@@ -2,7 +2,7 @@ const connection = require("../../Model/Database/dbconfig");
 
 const getStdPro = (req, res) => {
   let query =
-    "SELECT profile_id, student_id, gender, email, student_documentation, address, city, state, nationality, profile_photo, doj, dob, phone_number FROM studentprofile";
+    "SELECT profile_id, student_id, gender, email, address, city, state, nationality, profile_photo, doj, dob, phone_number FROM studentprofile";
   connection.query(query, (err, result) => {
     if (err) {
       console.log(err);
@@ -17,7 +17,7 @@ const getStdPro = (req, res) => {
 const getSinglePro = (req, res) => {
   let student_id = req.params.student_id;
   let query =
-    "SELECT profile_id, student_id, gender, email, student_documentation, address, city, state, nationality, profile_photo, doj, dob, phone_number FROM studentprofile WHERE student_id=$1";
+    "SELECT profile_id, student_id, gender, email, address, city, state, nationality, profile_photo, doj, dob, phone_number FROM studentprofile WHERE student_id=$1";
   connection.query(query, [student_id], (err, result) => {
     if (err) {
       console.log(err);
@@ -30,47 +30,51 @@ const getSinglePro = (req, res) => {
 };
 
 const postStdPro = (req, res) => {
-  var fullUrl = req.protocol + "://" + req.get("host") + "/images/";
-  let student_profile_data = {
-    profile_id: req.body.profile_id,
-    student_id: req.body.student_id,
-    gender: req.body.gender,
-    email: req.body.email,
-    student_documentation: req.body.student_documentation,
-    address: req.body.address,
-    city: req.body.city,
-    state: req.body.state,
-    nationality: req.body.nationality,
-    profile_photo: fullUrl + req.file.filename,
-    doj: req.body.doj,
-    dob: req.body.dob,
-    phone_number: req.body.phone_number,
-  };
+  console.log("Received data:", req.body);
+
+  const fullUrl = `${req.protocol}://${req.get("host")}/images/`;
+  const student_id = req.body.student_id;
+  const {
+    gender,
+    email,
+    address,
+    city,
+    state,
+    nationality,
+    doj,
+    dob,
+    phone_number,
+  } = req.body;
+
+  const profile_photo = req.file ? fullUrl + req.file.filename : null;
+
+  const query = `
+    INSERT INTO studentprofile(
+      student_id, gender, email, address, city, state, nationality, profile_photo, doj, dob, phone_number
+    ) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`;
 
   const data = [
-    student_profile_data.profile_id,
-    student_profile_data.student_id,
-    student_profile_data.gender,
-    student_profile_data.email,
-    student_profile_data.student_documentation,
-    student_profile_data.address,
-    student_profile_data.city,
-    student_profile_data.state,
-    student_profile_data.nationality,
-    student_profile_data.profile_photo,
-    student_profile_data.doj,
-    student_profile_data.dob,
-    student_profile_data.phone_number,
+    student_id,
+    gender,
+    email,
+    address,
+    city,
+    state,
+    nationality,
+    profile_photo,
+    doj,
+    dob,
+    phone_number,
   ];
-  let query =
-    "INSERT INTO studentprofile(profile_id, student_id, gender, email, student_documentation, address, city, state, nationality, profile_photo, doj, dob, phone_number) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)";
+
+  console.log("Data to be inserted:", data);
+
   connection.query(query, data, (err, result) => {
     if (err) {
-      console.log(err);
-      res.status(500).send(err);
+      console.error("Error inserting student profile:", err);
+      res.status(500).send("Internal Server Error");
     } else {
-      res.status(201).send(result);
-      console.log(result);
+      res.status(201).json({ message: "Profile created successfully", result });
     }
   });
 };

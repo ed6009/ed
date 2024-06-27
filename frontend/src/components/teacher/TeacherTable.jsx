@@ -1,7 +1,13 @@
 import React, { useEffect, useMemo, useState, useCallback } from "react";
 import AddTeacherModal from "./AddTeacherModal";
 import TeacherProfileModal from "./teacherProfile/TeacherProfileModal";
-import { useTable, useSortBy, usePagination } from "react-table";
+import { Link } from "react-router-dom";
+import {
+  useTable,
+  useSortBy,
+  usePagination,
+  useGlobalFilter,
+} from "react-table";
 
 const EditTeacherModal = ({ teacher, patchTeacher }) => {
   const [teacher_name, setTeacher_name] = useState(teacher.teacher_name);
@@ -22,9 +28,9 @@ const EditTeacherModal = ({ teacher, patchTeacher }) => {
   return (
     <dialog id={`my_modal_${teacher.teacher_id}`} className="modal">
       <div className="modal-box">
-        <h3 className="font-bold text-lg">Edit Teacher</h3>
+        <h3 className="text-lg font-bold">Edit Teacher</h3>
         <form onSubmit={handleSubmit}>
-          <label className="input input-bordered flex items-center gap-2 mb-2">
+          <label className="flex items-center gap-2 mb-2 input input-bordered">
             Teacher ID
             <input
               type="text"
@@ -33,7 +39,7 @@ const EditTeacherModal = ({ teacher, patchTeacher }) => {
               disabled
             />
           </label>
-          <label className="input input-bordered flex items-center gap-2 mb-2">
+          <label className="flex items-center gap-2 mb-2 input input-bordered">
             Teacher Name
             <input
               type="text"
@@ -42,7 +48,7 @@ const EditTeacherModal = ({ teacher, patchTeacher }) => {
               onChange={(e) => setTeacher_name(e.target.value)}
             />
           </label>
-          <label className="input input-bordered flex items-center gap-2 mb-2">
+          <label className="flex items-center gap-2 mb-2 input input-bordered">
             Specialization
             <input
               type="text"
@@ -52,7 +58,7 @@ const EditTeacherModal = ({ teacher, patchTeacher }) => {
             />
           </label>
           <select
-            className="input select select-bordered w-full mb-2"
+            className="w-full mb-2 input select select-bordered"
             value={status}
             onChange={(e) => setStatus(e.target.value)}
           >
@@ -62,7 +68,7 @@ const EditTeacherModal = ({ teacher, patchTeacher }) => {
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
           </select>
-          <label className="input input-bordered flex items-center gap-2 mb-2">
+          <label className="flex items-center gap-2 mb-2 input input-bordered">
             Qualification
             <input
               type="text"
@@ -71,7 +77,7 @@ const EditTeacherModal = ({ teacher, patchTeacher }) => {
               onChange={(e) => setQualification(e.target.value)}
             />
           </label>
-          <button type="submit" className="btn mt-2 ">
+          <button type="submit" className="mt-2 btn ">
             Submit
           </button>
         </form>
@@ -115,9 +121,9 @@ const TeacherTable = () => {
       {
         Header: "Actions",
         Cell: ({ row }) => (
-          <div className="flex items-center justify-center">
+          <div className="flex justify-evenly">
             <button
-              className="btn btn-sm btn-primary mr-2"
+              className="mr-2 btn btn-sm btn-primary"
               onClick={() =>
                 document
                   .getElementById(`my_modal_${row.original.teacher_id}`)
@@ -147,6 +153,8 @@ const TeacherTable = () => {
             <TeacherProfileModal
               teacher_id={row.original.teacher_id}
               teacher_name={row.original.teacher_name}
+              status={ row.original.status }
+              fetchTeacherData={row.original.fetchTeacherData}
             />
           </div>
         ),
@@ -156,12 +164,16 @@ const TeacherTable = () => {
   );
 
   useEffect(() => {
+    fetchTeacherData();
+  }, []);
+
+  function fetchTeacherData() {
     fetch("http://localhost:8080/gettchr")
       .then((res) => res.json())
       .then((result) => {
         setData(result);
       });
-  }, []);
+  }
 
   const patchTeacher = useCallback((teacher_id, updatedData) => {
     fetch(`http://localhost:8080/patchtchr/${teacher_id}`, {
@@ -197,19 +209,101 @@ const TeacherTable = () => {
     gotoPage,
     pageCount,
     state,
+    setPageSize,
+    setGlobalFilter,
     prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination);
+  } = useTable({ columns, data }, useGlobalFilter, useSortBy, usePagination);
 
-  const { pageIndex } = state;
+  const { pageIndex, pageSize, globalFilter } = state;
 
   return (
     <div>
-      <div className="table-container border border-gray-300 rounded-lg mx-8">
-        <div className="flex justify-between items-center mx-20 mt-2 pb-2 shadow-sm">
-          <h1 className="text-xl font-semibold items-center">
+      <div className="mx-10 text-sm breadcrumbs">
+        <ul>
+          <li>
+            <Link to="/dashboard">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="w-4 h-4 mr-2 stroke-current"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                />
+              </svg>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/teacher">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="w-4 h-4 mr-2 stroke-current"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"
+                />
+              </svg>
+              Teacher
+            </Link>
+          </li>
+        </ul>
+      </div>
+      <div className="mx-8 border border-gray-300 rounded-lg table-container">
+        <div className="flex items-center justify-between pb-2 mx-20 mt-2 shadow-sm">
+          <h1 className="items-center text-xl font-semibold">
             All Teacher List
           </h1>
           <AddTeacherModal />
+        </div>
+        <div className="flex items-center justify-between pb-2 mx-20 mt-2 shadow-sm">
+          <div className="flex items-center gap-1">
+            <span>Show</span>
+            <select
+              className="select select-bordered select-sm"
+              value={pageSize}
+              onChange={(e) => setPageSize(Number(e.target.value))}
+            >
+              {[5, 10, 15, 20].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  {pageSize}
+                </option>
+              ))}
+            </select>
+            <span>enrties</span>
+          </div>
+          <div>
+            <label className="flex items-center gap-2 input input-sm input-bordered">
+              <input
+                type="text"
+                className="grow"
+                placeholder="Search"
+                value={globalFilter || ""}
+                onChange={(e) => setGlobalFilter(e.target.value)}
+              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                className="w-4 h-4 opacity-70"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </label>
+          </div>
         </div>
         <div className="overflow-x-auto">
           <table {...getTableProps()} className="table">
@@ -219,7 +313,7 @@ const TeacherTable = () => {
                   {headerGroup.headers.map((column) => (
                     <th
                       {...column.getHeaderProps(column.getSortByToggleProps())}
-                      className="text-center text-base"
+                      className="text-base text-center"
                     >
                       <div className="flex items-center justify-center">
                         {column.render("Header")}
@@ -289,7 +383,7 @@ const TeacherTable = () => {
               })}
             </tbody>
           </table>
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-4 mb-2">
             <div>
               <span>
                 Page{" "}

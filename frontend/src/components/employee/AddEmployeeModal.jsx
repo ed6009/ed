@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 
-const AddEmployeeModal = () => {
+const AddEmployeeModal = ({ fetchEmpData }) => {
   const [emp_id, setEmp_id] = useState("");
   const [emp_name, setEmp_name] = useState("");
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("active");
   const [password, setPassword] = useState("");
   const [qualification, setQualification] = useState("");
   const [doj, setDoj] = useState("");
 
   const postEmp = () => {
     let data = { emp_id, emp_name, status, password, qualification, doj };
-    fetch("http://localhost:8080/posttchr", {
+    fetch("http://localhost:8080/postemp", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -20,7 +20,7 @@ const AddEmployeeModal = () => {
     })
       .then((result) => {
         console.log(result);
-        // getTchrData();
+        fetchEmpData(); // Uncomment this line if you have a function to refresh employee data
       })
       .catch((error) => {
         console.error("Error saving data:", error);
@@ -31,8 +31,10 @@ const AddEmployeeModal = () => {
     <div>
       <div>
         <button
-          className="btn bg-primary-content"
-          onClick={() => document.getElementById(`my_modal`).showModal()}
+          className="btn btn-neutral hover:scale-110 transition-transform duration-300"
+          onClick={() =>
+            document.getElementById(`my_modal_employee`).showModal()
+          }
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -50,10 +52,15 @@ const AddEmployeeModal = () => {
           </svg>
           Add Employee
         </button>
-        <dialog id={`my_modal`} className="modal">
+        <dialog id={`my_modal_employee`} className="modal">
           <div className="modal-box">
-            <h3 className="font-bold text-lg">Edit Employee</h3>
-            <form onSubmit={() => postEmp()}>
+            <h3 className="font-bold text-lg">Add Employee</h3>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                postEmp();
+              }}
+            >
               <label className="input input-bordered flex items-center gap-2 mb-2">
                 Employee ID
                 <input
@@ -87,36 +94,35 @@ const AddEmployeeModal = () => {
                   }}
                 />
               </label>
-              <label className="input input-bordered flex items-center gap-2 mb-2">
-                Specialization
-                <input
-                  type="text"
-                  className="grow"
-                  placeholder="Enter Qualification"
-                  onChange={(e) => {
-                    setQualification(e.target.value);
-                  }}
-                />
-              </label>
-              <label className="input input-bordered flex items-center gap-2 mb-2">
-                Status
-                <input
-                  type="text"
-                  className="grow"
-                  placeholder="Enter Status"
-                  onChange={(e) => {
-                    setStatus(e.target.value);
-                  }}
-                />
-              </label>
+              <select
+                className="input select select-bordered w-full mb-2"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option disabled value="">
+                  Status
+                </option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
               <label className="input input-bordered flex items-center gap-2 mb-2">
                 Password
                 <input
-                  type="text"
+                  type="password"
                   className="grow"
                   placeholder="Enter Password"
                   onChange={(e) => {
                     setPassword(e.target.value);
+                  }}
+                />
+              </label>
+              <label className="input input-bordered flex items-center gap-2 mb-2">
+                Date of Joining
+                <input
+                  type="date"
+                  className="grow"
+                  onChange={(e) => {
+                    setDoj(e.target.value);
                   }}
                 />
               </label>

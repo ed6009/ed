@@ -34,7 +34,7 @@ const Navbar = () => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
+                  className="w-5 h-5"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -55,10 +55,28 @@ const Navbar = () => {
                 className="drawer-overlay"
                 onClick={handleDrawerClose}
               ></label>
-              <ul className="menu w-72 pt-24 min-h-full bg-base-200 text-base-content text-xl">
+              <ul className="min-h-full pt-4 text-xl menu w-72 bg-base-200 text-base-content">
                 {/* Sidebar content here */}
                 <li>
-                  <a className="btn btn-lg mb-8 font-bold shadow-md">
+                  <div className="flex justify-center mb-4 text-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="w-24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m21 7.5-2.25-1.313M21 7.5v2.25m0-2.25-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3 2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75 2.25-1.313M12 21.75V19.5m0 2.25-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25"
+                      />
+                    </svg>
+                  </div>
+                </li>
+                <li>
+                  <a className="mb-8 font-bold shadow-md btn btn-lg">
                     <Link to="/dashboard">
                       <label className="flex flex-col items-center">
                         <svg
@@ -82,7 +100,7 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li>
-                  <a className="btn btn-lg mb-8 font-bold shadow-md">
+                  <a className="mb-8 font-bold shadow-md btn btn-lg">
                     <Link to="/role">
                       <label className="flex flex-col items-center">
                         <svg
@@ -106,7 +124,7 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li>
-                  <a className="btn  btn-lg mb-8 font-bold shadow-md">
+                  <a className="mb-8 font-bold shadow-md btn btn-lg">
                     <Link to="/employee">
                       <label className="flex flex-col items-center ">
                         <svg
@@ -129,7 +147,7 @@ const Navbar = () => {
                 </li>
 
                 <li>
-                  <a className="btn  btn-lg mb-8 font-bold shadow-md">
+                  <a className="mb-8 font-bold shadow-md btn btn-lg">
                     <Link to="/student">
                       <label className="flex flex-col items-center ">
                         <svg
@@ -154,7 +172,7 @@ const Navbar = () => {
                 </li>
 
                 <li>
-                  <a className="btn  btn-lg mb-8 font-bold shadow-md">
+                  <a className="mb-8 font-bold shadow-md btn btn-lg">
                     <Link to="/teacher">
                       <label className="flex flex-col items-center ">
                         <svg
@@ -179,7 +197,7 @@ const Navbar = () => {
                 </li>
 
                 <li>
-                  <a className="btn  btn-lg mb-8 font-bold shadow-md">
+                  <a className="mb-8 font-bold shadow-md btn btn-lg">
                     <Link to="/course">
                       <label className="flex flex-col items-center ">
                         <svg
@@ -207,10 +225,28 @@ const Navbar = () => {
           </div>
         </div>
         <div className="navbar-center">
-          <a className="btn btn-ghost text-2xl font-bold">ED Tech</a>
+          <Link to="/dashboard">
+            <a className="text-2xl font-bold btn btn-ghost">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m21 7.5-2.25-1.313M21 7.5v2.25m0-2.25-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3 2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75 2.25-1.313M12 21.75V19.5m0 2.25-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25"
+                />
+              </svg>
+              ED Tech
+            </a>
+          </Link>
         </div>
         <div className="navbar-end">
-          <label className="swap swap-rotate m-2">
+          <label className="m-2 swap swap-rotate">
             {/* this hidden checkbox controls the state */}
             <input
               type="checkbox"
@@ -220,7 +256,7 @@ const Navbar = () => {
 
             {/* sun icon */}
             <svg
-              className="swap-off fill-current w-8 h-8"
+              className="w-8 h-8 fill-current swap-off"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -229,7 +265,7 @@ const Navbar = () => {
 
             {/* moon icon */}
             <svg
-              className="swap-on fill-current w-8 h-8"
+              className="w-8 h-8 fill-current swap-on"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -241,7 +277,7 @@ const Navbar = () => {
 
       {/* Example table */}
       <div className={`table-container ${isDrawerOpen ? "drawer-open" : ""}`}>
-        <table className="table mt-20">{<Outlet />}</table>
+        <div className="w-full mt-5">{<Outlet />}</div>
       </div>
 
       <style jsx>{`
@@ -255,5 +291,51 @@ const Navbar = () => {
     </div>
   );
 };
+
+{
+  /* <style jsx>{`
+  .table-container {
+    transition: margin-left 0.3s ease;
+    margin-left: 0;
+  }
+  .drawer-side {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    width: 20rem;
+    background-color: #f9fafb;
+    transform: translateX(-20rem);
+    transition: transform 0.3s ease;
+  }
+  .drawer-open {
+    transform: translateX(0);
+  }
+  .drawer-toggle {
+    display: none;
+  }
+  .drawer-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1100;
+  }
+  .drawer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1050;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    display: none;
+  }
+  .drawer-open .drawer-overlay {
+    display: block;
+  }
+`}</style>; */
+}
 
 export default Navbar;

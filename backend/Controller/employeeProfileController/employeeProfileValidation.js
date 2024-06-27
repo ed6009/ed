@@ -1,7 +1,6 @@
 const Joi = require("joi");
 
 const schema = Joi.object({
-  profile_id: Joi.string().min(2).max(5).required(),
   emp_id: Joi.string().min(2).max(5).required(),
   email: Joi.string().email().required(),
   phone_number: Joi.string().min(10).required(),

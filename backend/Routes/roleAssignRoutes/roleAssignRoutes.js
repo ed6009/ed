@@ -5,6 +5,7 @@ const {
   postRoleAssign,
   deleteRoleAssign,
   patchRoleAssign,
+  getSingleRoleAssign
 } = require("../../Controller/roleAssignController/roleAssignController");
 const validateSchema = require("../../Controller/roleAssignController/roleAssignValidation");
 
@@ -15,5 +16,6 @@ roleAssignRouter.patch(
   "/patchroleassign/:old_role_id/:old_emp_id",
   patchRoleAssign
 );
+roleAssignRouter.get("/getsingleroleassign/:emp_id", getSingleRoleAssign);
 
 module.exports = roleAssignRouter;

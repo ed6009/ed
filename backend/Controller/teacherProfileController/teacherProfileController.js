@@ -2,7 +2,7 @@ const connection = require("../../Model/Database/dbconfig");
 
 const getTchrPro = (req, res) => {
   let query =
-    "SELECT profile_id, teacher_id, gender, email, teacher_documentation, address, city, state, marital_status, nationality, salary, profile_photo, doj, dob FROM teacherprofile";
+    "SELECT profile_id, teacher_id, gender, email, address, city, state, marital_status, nationality, salary, profile_photo, doj, dob FROM teacherprofile";
   connection.query(query, (err, result) => {
     if (err) {
       res.send(err);
@@ -17,7 +17,7 @@ const getTchrPro = (req, res) => {
 const getSinglePro = (req, res) => {
   let teacher_id = req.params.teacher_id;
   let query =
-    "SELECT profile_id, teacher_id, gender, email, teacher_documentation, address, city, state, marital_status, nationality, salary, profile_photo, doj, dob FROM teacherprofile WHERE teacher_id=$1";
+    "SELECT profile_id, teacher_id, gender, email, address, city, state, marital_status, nationality, salary, profile_photo, doj, dob FROM teacherprofile WHERE teacher_id=$1";
   connection.query(query, [teacher_id], (err, result) => {
     if (err) {
       res.send(err);
@@ -32,11 +32,9 @@ const getSinglePro = (req, res) => {
 const postTchrPro = (req, res) => {
   var fullUrl = req.protocol + "://" + req.get("host") + "/images/";
   let teacher_profile_data = {
-    profile_id: req.body.profile_id,
     teacher_id: req.body.teacher_id,
     gender: req.body.gender,
     email: req.body.email,
-    teacher_documentation: req.body.teacher_documentation,
     address: req.body.address,
     city: req.body.city,
     state: req.body.state,
@@ -48,11 +46,9 @@ const postTchrPro = (req, res) => {
     dob: req.body.dob,
   };
   const data = [
-    teacher_profile_data.profile_id,
     teacher_profile_data.teacher_id,
     teacher_profile_data.gender,
     teacher_profile_data.email,
-    teacher_profile_data.teacher_documentation,
     teacher_profile_data.address,
     teacher_profile_data.city,
     teacher_profile_data.state,
@@ -64,7 +60,7 @@ const postTchrPro = (req, res) => {
     teacher_profile_data.dob,
   ];
   let query =
-    "INSERT INTO teacherprofile(profile_id, teacher_id, gender, email, teacher_documentation, address, city, state, marital_status, nationality, salary, profile_photo, doj, dob) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)";
+    "INSERT INTO teacherprofile(teacher_id, gender, email, address, city, state, marital_status, nationality, salary, profile_photo, doj, dob) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)";
   connection.query(query, data, (err, result) => {
     if (err) {
       res.send(err);
@@ -96,7 +92,6 @@ const patchTchrPro = (req, res) => {
   let {
     gender,
     email,
-    teacher_documentation,
     address,
     city,
     state,
@@ -108,7 +103,7 @@ const patchTchrPro = (req, res) => {
     dob,
   } = req.body;
   let query =
-    "UPDATE teacherprofile SET gender = $1, email = $2, teacher_documentation = $3, address = $4, city = $5, state = $6, marital_status = $7, nationality = $8, salary = $9, profile_photo = $10, doj = $11, dob = $12 WHERE profile_id = $13 AND teacher_id = $14";
+    "UPDATE teacherprofile SET gender = $1, email = $2, address = $3, city = $4, state = $5, marital_status = $6, nationality = $7, salary = $8, profile_photo = $9, doj = $10, dob = $11 WHERE profile_id = $12 AND teacher_id = $13";
   connection.query(
     query,
     [

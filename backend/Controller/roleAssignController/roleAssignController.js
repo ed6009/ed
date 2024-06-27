@@ -13,6 +13,20 @@ const getRoleAssign = (req, res) => {
   });
 };
 
+const getSingleRoleAssign = (req, res) => {
+  let emp_id = req.params.emp_id;
+  let query = "SELECT emp_id, role_id FROM roleassign WHERE emp_id=$1";
+  connection.query(query, [emp_id], (err, result) => {
+    if (err) {
+      res.send(err);
+      console.log(err);
+    } else {
+      res.send(result.rows);
+      console.log(result.rows);
+    }
+  });
+};
+
 const postRoleAssign = (req, res) => {
   let { role_id, emp_id } = req.body;
   let query = "INSERT INTO roleassign(role_id, emp_id) VALUES($1, $2)";
@@ -66,4 +80,5 @@ module.exports = {
   postRoleAssign,
   deleteRoleAssign,
   patchRoleAssign,
+  getSingleRoleAssign,
 };

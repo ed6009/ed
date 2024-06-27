@@ -14,7 +14,7 @@ studentProfileRouter.get("/getstdpro", getStdPro);
 studentProfileRouter.get("/getsinglestdpro/:student_id", getSinglePro);
 studentProfileRouter.post(
   "/poststdpro",
-  upload.single("image"),
+  upload.single("profile_photo"),
   validateSchema,
   postStdPro
 );

@@ -7,6 +7,20 @@ module.exports = {
   plugins: [require("daisyui")],
   daisyui: {
     themes: [
+      {
+        synthwave: {
+          ...require("daisyui/src/theming/themes")["synthwave"],
+          "--rounded-box": "1rem",
+          "--rounded-btn": "2rem",
+          "--rounded-badge": "1rem",
+        },
+        light: {
+          ...require("daisyui/src/theming/themes")["light"],
+          "--rounded-box": "1rem",
+          "--rounded-btn": "2rem",
+          "--rounded-badge": "1rem",
+        },
+      },
       "light",
       "dark",
       "cupcake",

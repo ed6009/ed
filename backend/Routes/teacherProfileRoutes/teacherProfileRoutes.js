@@ -13,7 +13,7 @@ const upload = require("../../Model/Multer/multerconfig");
 teacherProfileRouter.get("/gettchrpro", getTchrPro);
 teacherProfileRouter.post(
   "/posttchrpro",
-  upload.single("image"),
+  upload.single("profile_photo"),
   validateSchema,
   postTchrPro
 );

@@ -31,7 +31,9 @@ const AddStudentModal = () => {
       <div>
         <button
           className="btn btn-neutral hover:scale-110 transition-transform duration-300"
-          onClick={() => document.getElementById(`my_modal_student`).showModal()}
+          onClick={() =>
+            document.getElementById(`my_modal_student`).showModal()
+          }
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -86,17 +88,17 @@ const AddStudentModal = () => {
                   }}
                 />
               </label>
-              <label className="input input-bordered flex items-center gap-2 mb-2">
-                Status
-                <input
-                  type="text"
-                  className="grow"
-                  placeholder="Enter Status"
-                  onChange={(e) => {
-                    setStatus(e.target.value);
-                  }}
-                />
-              </label>
+              <select
+                className="input select select-bordered w-full mb-2"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option disabled value="">
+                  Status
+                </option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
               <label className="input input-bordered flex items-center gap-2 mb-2">
                 Password
                 <input
